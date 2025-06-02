@@ -1,5 +1,7 @@
 package com.codewithnkosi.patientservice.exception;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -11,6 +13,8 @@ import java.util.Map;
 
 @ControllerAdvice
 public class PatientServiceException {
+    private static final Logger log = LoggerFactory.getLogger(PatientServiceException.class);
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String,String>> handleValidationException(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
@@ -20,5 +24,21 @@ public class PatientServiceException {
             errors.put(field, message);
         });
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+    }
+
+    @ExceptionHandler(EmailAlreadyExistsException.class)
+    public ResponseEntity<Map<String,String>> handleEmailAlreadyExistsException(EmailAlreadyExistsException ex) {
+        Map<String, String> errors = new HashMap<>();
+        log.warn("A Patient with this Email already exists {}", ex.getMessage());
+        errors.put("message", "email already exists");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+    }
+
+    @ExceptionHandler(PatientNotFoundException.class)
+    public ResponseEntity<Map<String,String>> handlePatientNotFoundException(PatientNotFoundException ex) {
+        Map<String, String> errors = new HashMap<>();
+        log.warn("A Patient with this ID does not exist {}", ex.getMessage());
+        errors.put("message", "Patient not found with this id ");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errors);
     }
 }

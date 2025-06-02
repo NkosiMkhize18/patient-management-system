@@ -1,13 +1,12 @@
-### POST Request to add a Patient
-POST http://localhost:4000/patients
+### PUT requests to update patient details
+PUT http://localhost:4000/patients/123e4567-e89b-12d3-a456-426614174000
 Content-Type: application/json
 
 {
-    "name": "Some name",
-    "email": "admin@gmail.com",
-    "address": "Some address",
-    "dateOfBirth": "1995-04-06",
-    "registeredDate": "1995-04-06"
+  "name": "Name 2",
+  "email": "john.doe@example.com",
+  "address": "New address",
+  "dateOfBirth": "1994-02-04",
+  "registeredDate": "2025-05-01"
 }
-
 ###
