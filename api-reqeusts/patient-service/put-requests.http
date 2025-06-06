@@ -1,0 +1,12 @@
+### PUT requests to update patient details
+PUT http://localhost:4000/patients/223e4567-e89b-12d3-a456-426614174014
+Content-Type: application/json
+
+{
+  "name": "Isabella Walker",
+  "email": "isa.walker@example.com",
+  "address": "78 Willow St, Springfield",
+  "dateOfBirth": "1987-10-17",
+  "registeredDate": "2025-05-01"
+}
+###

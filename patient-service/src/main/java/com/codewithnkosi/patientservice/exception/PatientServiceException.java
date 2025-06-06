@@ -1,7 +1,6 @@
 package com.codewithnkosi.patientservice.exception;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -12,11 +11,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 @ControllerAdvice
+@Slf4j
 public class PatientServiceException {
-    private static final Logger log = LoggerFactory.getLogger(PatientServiceException.class);
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String,String>> handleValidationException(MethodArgumentNotValidException ex) {
+    public ResponseEntity<Map<String, String>> handleValidationException(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getFieldErrors().forEach(error -> {
             String field = error.getField();
@@ -27,7 +26,7 @@ public class PatientServiceException {
     }
 
     @ExceptionHandler(EmailAlreadyExistsException.class)
-    public ResponseEntity<Map<String,String>> handleEmailAlreadyExistsException(EmailAlreadyExistsException ex) {
+    public ResponseEntity<Map<String, String>> handleEmailAlreadyExistsException(EmailAlreadyExistsException ex) {
         Map<String, String> errors = new HashMap<>();
         log.warn("A Patient with this Email already exists {}", ex.getMessage());
         errors.put("message", "email already exists");
@@ -35,7 +34,7 @@ public class PatientServiceException {
     }
 
     @ExceptionHandler(PatientNotFoundException.class)
-    public ResponseEntity<Map<String,String>> handlePatientNotFoundException(PatientNotFoundException ex) {
+    public ResponseEntity<Map<String, String>> handlePatientNotFoundException(PatientNotFoundException ex) {
         Map<String, String> errors = new HashMap<>();
         log.warn("A Patient with this ID does not exist {}", ex.getMessage());
         errors.put("message", "Patient not found with this id ");

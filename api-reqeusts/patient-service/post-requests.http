@@ -1,0 +1,12 @@
+### POST Request to add a Patient
+POST http://localhost:4000/patients
+Content-Type: application/json
+
+{
+    "name": "Some name34",
+    "email": "admin341@gmail.com",
+    "address": "Some address34",
+    "dateOfBirth": "1995-04-06"
+}
+
+###

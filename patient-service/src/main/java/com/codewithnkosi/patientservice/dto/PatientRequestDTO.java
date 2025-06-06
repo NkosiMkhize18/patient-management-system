@@ -1,5 +1,6 @@
 package com.codewithnkosi.patientservice.dto;
 
+import com.codewithnkosi.patientservice.dto.validators.PatientValidatorGroup;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -24,7 +25,7 @@ public class PatientRequestDTO {
     @NotBlank(message = "Date of birth required")
     private String dateOfBirth;
 
-    @NotBlank(message = "Registered Date is required")
+    @NotBlank(groups = PatientValidatorGroup.class, message = "Registered Date is required")
     private String registeredDate;
 
 }
