@@ -28,7 +28,7 @@ public class AuthIntegrationTest {
                 }
                 """;
 
-        //Act
+        //Act and assert
         Response response = given()
                 .contentType("application/json")
                 .body(loginPayLoad)
