@@ -6,7 +6,6 @@ Content-Type: application/json
   "name": "Isabella Walker",
   "email": "isa.walker@example.com",
   "address": "78 Willow St, Springfield",
-  "dateOfBirth": "1987-10-17",
-  "registeredDate": "2025-05-01"
+  "dateOfBirth": "1987-10-17"
 }
 ###

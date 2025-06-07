@@ -4,8 +4,6 @@ WORKDIR /app
 
 COPY pom.xml .
 
-#This will cache the dependencies, when we run the container again,
-#we don't have to download from scratch
 RUN mvn dependency:go-offline -B
 
 COPY src ./src
@@ -19,6 +17,6 @@ WORKDIR /app
 COPY --from=builder ./app/target/billing-service-0.0.1-SNAPSHOT.jar ./app.jar
 
 EXPOSE 4001
-EXPOSE 9091
+EXPOSE 9001
 
 ENTRYPOINT ["java", "-jar", "app.jar"]

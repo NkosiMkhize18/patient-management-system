@@ -6,6 +6,7 @@ import com.codewithnkosi.patientservice.dto.PatientResponseDTO;
 import com.codewithnkosi.patientservice.exception.EmailAlreadyExistsException;
 import com.codewithnkosi.patientservice.exception.PatientNotFoundException;
 import com.codewithnkosi.patientservice.grpc.BillingServiceGrpcClient;
+import com.codewithnkosi.patientservice.kafka.KafkaProducer;
 import com.codewithnkosi.patientservice.mapper.PatientMapper;
 import com.codewithnkosi.patientservice.model.Patient;
 import com.codewithnkosi.patientservice.repository.PatientRepository;
@@ -21,10 +22,14 @@ import java.util.UUID;
 public class PatientService {
     private final PatientRepository patientRepository;
     private final BillingServiceGrpcClient billingServiceGrpcClient;
+    private final KafkaProducer kafkaProducer;
 
-    public PatientService(PatientRepository patientRepository, BillingServiceGrpcClient billingServiceGrpcClient) {
+    public PatientService(PatientRepository patientRepository,
+                          BillingServiceGrpcClient billingServiceGrpcClient,
+                          KafkaProducer kafkaProducer) {
         this.patientRepository = patientRepository;
         this.billingServiceGrpcClient = billingServiceGrpcClient;
+        this.kafkaProducer = kafkaProducer;
     }
 
     public List<PatientResponseDTO> getAllPatients() {
@@ -39,9 +44,11 @@ public class PatientService {
         Patient patient = patientRepository.save(PatientMapper.toPatient(patientRequestDTO));
 
         log.info("Creating Billing account for patient {}", patient.getId());
-        BillingResponse billingAccount = billingServiceGrpcClient.createBillingAccount(patient.getId().toString(), patient.getName(), patient.getEmail());
+        BillingResponse billingAccount = billingServiceGrpcClient
+                .createBillingAccount(patient.getId().toString(), patient.getName(), patient.getEmail());
         log.info("Billing account created successfully for patient {}, account {}", patient.getId(), billingAccount);
 
+        kafkaProducer.sendEvent(patient);
         return PatientMapper.toPatientResponseDTO(patient);
     }
 

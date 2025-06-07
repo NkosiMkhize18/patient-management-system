@@ -3,11 +3,11 @@ POST http://localhost:4000/patients
 Content-Type: application/json
 
 {
-    "name": "Some name344546",
-    "email": "admin3bebe41@gmail.com",
-    "address": "Some address34verfe",
-    "dateOfBirth": "1995-04-06",
-    "registeredDate": "1995-04-06"
+  "name": "Kafka styff",
+  "email": "Nkosii.arjd@gmail.com",
+  "address": "Fo8a5s",
+  "dateOfBirth": "1993-02-06",
+  "registeredDate": "1993-02-16"
 }
 
 ###
