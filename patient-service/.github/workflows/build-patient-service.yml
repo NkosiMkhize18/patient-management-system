@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    uses: patient-management-system/.github/workflows/java-maven-build.yml
+    uses: ./.github/workflows/java-maven-build.yml
     with:
       service_name: patient-service
       build_type: docker
