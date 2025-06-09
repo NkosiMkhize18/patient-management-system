@@ -12,7 +12,7 @@ jobs:
     with:
       service_name: patient-service
       build_type: docker
-      dockerfile_path: ${{ inputs.service_name }}/Dockerfile
+      dockerfile_path: patient-service/Dockerfile
       java_version: 21
       java_distribution: temurin
       skip_tests: false
