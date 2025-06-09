@@ -1,0 +1,19 @@
+name: Build Microservice
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    uses: https://github.com/NkosiMkhize18/patient-management-system/.github/workflows/java-maven-build.yml@main
+    with:
+      service_name: private-service
+      build_type: docker
+      dockerfile_path: ${{ service_name }}/Dockerfile
+      java_version: 21
+      java_distribution: temurin
+      skip_tests: false
+      maven-version: 3.9.9

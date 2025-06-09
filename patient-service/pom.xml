@@ -108,11 +108,16 @@
 			<artifactId>spring-kafka</artifactId>
 			<version>3.3.0</version>
 		</dependency>
+		<!-- For testing -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
 		<extensions>
-			<!-- Ensure OS compatibility for protoc -->
 			<extension>
 				<groupId>kr.motd.maven</groupId>
 				<artifactId>os-maven-plugin</artifactId>
