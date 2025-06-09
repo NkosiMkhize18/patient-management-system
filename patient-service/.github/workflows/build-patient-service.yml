@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    uses: https://github.com/NkosiMkhize18/patient-management-system/.github/workflows/java-maven-build.yml@main
+    uses: https://github.com/NkosiMkhize18/patient-management-system/.github/workflows/java-maven-build.yml@master
     with:
       service_name: private-service
       build_type: docker
