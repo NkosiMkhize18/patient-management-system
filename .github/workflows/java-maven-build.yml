@@ -64,7 +64,6 @@ jobs:
           else
             mvn clean install
           fi
-          cd ..
 
       - name: Docker Build
         if: ${{ inputs.build_type == 'docker' }}
@@ -72,3 +71,4 @@ jobs:
           IMAGE_TAG: ${{ steps.tag.outputs.tag }}
         run: |
           docker build -t ${{ inputs.service_name }}:latest -f ${{ inputs.dockerfile_path }} .
+          cd ..
