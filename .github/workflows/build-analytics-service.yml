@@ -1,4 +1,4 @@
-name: Build Patient Service
+name: Build Analytics Service
 
 on:
   push:
@@ -10,9 +10,9 @@ jobs:
   build:
     uses: ./.github/workflows/java-maven-build.yml
     with:
-      service_name: patient-service
+      service_name: analytics-service
       build_type: docker
-      dockerfile_path: patient-service/Dockerfile
+      dockerfile_path: analytics-service/Dockerfile
       java_version: 21
       java_distribution: temurin
       skip_tests: false
