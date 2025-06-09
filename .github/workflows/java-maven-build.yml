@@ -71,4 +71,4 @@ jobs:
         env:
           IMAGE_TAG: ${{ steps.tag.outputs.tag }}
         run: |
-          docker build -t ${{ inputs.service_name }}$IMAGE_TAG -f ${{ inputs.dockerfile_path }} .
+          docker build -t ${{ inputs.service_name }}:latest -f ${{ inputs.dockerfile_path }} .
