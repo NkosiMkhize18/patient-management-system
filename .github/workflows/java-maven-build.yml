@@ -70,5 +70,5 @@ jobs:
         env:
           IMAGE_TAG: ${{ steps.tag.outputs.tag }}
         run: |
+          cd ${{ inputs.service_name }}
           docker build -t ${{ inputs.service_name }}:latest -f ${{ inputs.dockerfile_path }} .
-          cd ..
