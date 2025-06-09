@@ -58,11 +58,13 @@ jobs:
 
       - name: Build with Maven
         run: |
+          cd ${{ inputs.service_name }}
           if ${{ inputs.skip_tests }}; then
             mvn clean install -DskipTests
           else
             mvn clean install
           fi
+          cd ..
 
       - name: Docker Build
         if: ${{ inputs.build_type == 'docker' }}
